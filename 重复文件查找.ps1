@@ -1,7 +1,17 @@
-﻿$dict = @{}
-Get-ChildItem -Path $home -Filter *.ps1 -Recurse |
-    ForEach-Object {
-        $hash = ($_ | Get-FileHash -Algorithm MD5).Hash
+﻿param(
+    # [switch]$vmware,
+    # [Parameter(Mandatory = $true)][string]$Version,
+    # [switch]$firefox
+    # [switch]$foxit,
+    # [switch]$soGou,
+    # [switch]$Drcom,
+    # [switch]$putty,
+    [string]$DirPath
+)
+$dict = @{}
+Get-ChildItem -Path $DirPath -Recurse | ForEach-Object {
+        
+        $hash = ($_ | Get-FileHash -Algorithm SHA1).Hash
         if ($dict.ContainsKey($hash))
         {
             [PSCustomObject]@{
